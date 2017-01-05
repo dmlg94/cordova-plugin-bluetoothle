@@ -9,8 +9,18 @@ var bluetoothle = {
   disable: function(successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, bluetoothleName, "disable", []);
   },
-  startScan: function(successCallback, errorCallback, params) {
-    cordova.exec(successCallback, errorCallback, bluetoothleName, "startScan", [params]);
+  startScan: function(successCallback,discoveredCallback ,errorCallback, params) {
+     var success = function(result) {
+      if (typeof result.status == "scanResult") {
+        if (self.onprogress) {
+          discoveredCallback(result);
+        }
+      }
+      else {
+        startCallback(result);
+      }
+    }
+    cordova.exec(success, errorCallback, bluetoothleName, "startScan", [params]);
   },
   stopScan: function(successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, bluetoothleName, "stopScan", []);
