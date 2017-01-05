@@ -11,12 +11,12 @@ var bluetoothle = {
   },
   startScan: function(startCallback,discoveredCallback ,errorCallback, params) {
      var success = function(result) {
-      if (typeof result.status == "scanResult") {
-          discoveredCallback(result);
-      }
-      else {
-        startCallback(result);
-      }
+    if (result.status === "scanResult") {
+        discoveredCallback(result);
+    }
+    else{
+    startCallback(result)
+    }
     }
     cordova.exec(success, errorCallback, bluetoothleName, "startScan", [params]);
   },
