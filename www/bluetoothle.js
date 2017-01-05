@@ -12,9 +12,7 @@ var bluetoothle = {
   startScan: function(startCallback,discoveredCallback ,errorCallback, params) {
      var success = function(result) {
       if (typeof result.status == "scanResult") {
-        if (self.onprogress) {
           discoveredCallback(result);
-        }
       }
       else {
         startCallback(result);
